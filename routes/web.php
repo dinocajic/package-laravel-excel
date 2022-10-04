@@ -2,10 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/rerun-migrations', function() {
+    Artisan::call('migrate:fresh');
+
+    return redirect('/');
+});
+
+Route::get(
+    '/get-users',
+    [UserController::class, 'all']
+);
 
 Route::get(
     '/import-users',
@@ -30,4 +42,14 @@ Route::get(
 Route::get(
     '/import-multiple-sheets-by-name',
     [UserController::class, 'import_multiple_select_sheet_by_name']
+);
+
+Route::get(
+    '/import-multiple-sheets-skip-unknown',
+    [UserController::class, 'import_multiple_sheet_skip_unknown']
+);
+
+Route::get(
+    '/import-multiple-sheets-skip-unknown-sometimes',
+    [UserController::class, 'import_multiple_sheet_skip_unknown_sometimes']
 );

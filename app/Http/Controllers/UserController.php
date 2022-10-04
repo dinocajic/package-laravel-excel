@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\MultiSheetSelector;
+use App\Imports\MultiSheetSelectSpecificSheet;
 use App\Imports\MultiSheetSingleFormatImport;
 use App\Imports\MultiSheetSkipUnknownSheet;
 use App\Imports\MultiSheetSkipUnknownSheetTwo;
@@ -71,6 +72,15 @@ class UserController extends Controller
     public function import_multiple_sheet_skip_unknown_sometimes() {
         Excel::import(
             new MultiSheetSkipUnknownSheetTwo, 'mock_data/MOCK_DATA_3.xlsx'
+        );
+
+        return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_multiple_sheet_conditional_selection() {
+        Excel::import(
+            (new MultiSheetSelectSpecificSheet())->onlySheets('user_data_1'),
+            'mock_data/MOCK_DATA_3.xlsx'
         );
 
         return redirect('/')->with('success', 'Users Imported Successfully!');

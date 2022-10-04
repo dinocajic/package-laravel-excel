@@ -53,3 +53,8 @@ Route::get(
     '/import-multiple-sheets-skip-unknown-sometimes',
     [UserController::class, 'import_multiple_sheet_skip_unknown_sometimes']
 );
+
+Route::get(
+    '/import-multiple-sheets-with-conditional-selection',
+    [UserController::class, 'import_multiple_sheet_conditional_selection']
+);

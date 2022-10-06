@@ -58,3 +58,13 @@ Route::get(
     '/import-multiple-sheets-with-conditional-selection',
     [UserController::class, 'import_multiple_sheet_conditional_selection']
 );
+
+Route::get(
+    '/import-sheet-with-formula',
+    [UserController::class, 'import_sheet_with_formula']
+);
+
+Route::get(
+    '/import-multiple-sheets-with-formulas',
+    [UserController::class, 'import_multiple_sheets_with_formulas']
+);

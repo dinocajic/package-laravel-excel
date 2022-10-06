@@ -9,6 +9,8 @@ use App\Imports\MultiSheetSkipUnknownSheet;
 use App\Imports\MultiSheetSkipUnknownSheetTwo;
 use App\Imports\MultiSheetSpecificSelectorByIndex;
 use App\Imports\MultiSheetSpecificSelectorByName;
+use App\Imports\MultiSheetWithFormulasImporter;
+use App\Imports\SheetWithFormulaImport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Imports\UsersImport;
@@ -81,6 +83,24 @@ class UserController extends Controller
         Excel::import(
             (new MultiSheetSelectSpecificSheet())->onlySheets('user_data_1'),
             'mock_data/MOCK_DATA_3.xlsx'
+        );
+
+        return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_sheet_with_formula() {
+        Excel::import(
+            new SheetWithFormulaImport,
+            'mock_data/MOCK_DATA_4.xlsx'
+        );
+
+        return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_multiple_sheets_with_formulas() {
+        Excel::import(
+            new MultiSheetWithFormulasImporter,
+            'mock_data/MOCK_DATA_5.xlsx'
         );
 
         return redirect('/')->with('success', 'Users Imported Successfully!');

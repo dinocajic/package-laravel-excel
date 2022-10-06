@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\BatchImport;
 use App\Imports\MultiSheetSelector;
 use App\Imports\MultiSheetSelectSpecificSheet;
 use App\Imports\MultiSheetSingleFormatImport;
@@ -101,6 +102,15 @@ class UserController extends Controller
         Excel::import(
             new MultiSheetWithFormulasImporter,
             'mock_data/MOCK_DATA_5.xlsx'
+        );
+
+        return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_with_batch() {
+        Excel::import(
+            new BatchImport,
+            'mock_data/MOCK_DATA_6.csv'
         );
 
         return redirect('/')->with('success', 'Users Imported Successfully!');

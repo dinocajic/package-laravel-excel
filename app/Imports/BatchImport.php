@@ -4,11 +4,12 @@ namespace App\Imports;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Concerns\HasReferencesToOtherSheets;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class FirstSheetNoFormulaImporter implements ToModel, WithHeadingRow, HasReferencesToOtherSheets
+class BatchImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUpserts
 {
     /**
      * @param array $row
@@ -22,5 +23,15 @@ class FirstSheetNoFormulaImporter implements ToModel, WithHeadingRow, HasReferen
             'email'    => $row['email'],
             'password' => Hash::make($row['password']),
         ]);
+    }
+
+    public function batchSize(): int
+    {
+        return 100;
+    }
+
+    public function uniqueBy(): string
+    {
+        return 'email';
     }
 }

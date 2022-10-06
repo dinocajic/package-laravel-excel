@@ -68,3 +68,9 @@ Route::get(
     '/import-multiple-sheets-with-formulas',
     [UserController::class, 'import_multiple_sheets_with_formulas']
 );
+
+Route::get(
+    '/import-with-batch',
+    [UserController::class, 'import_with_batch']
+);
+

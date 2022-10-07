@@ -74,3 +74,8 @@ Route::get(
     [UserController::class, 'import_with_batch']
 );
 
+Route::get(
+    '/import-with-chunk-reading',
+    [UserController::class, 'import_with_chunk_reading']
+);
+

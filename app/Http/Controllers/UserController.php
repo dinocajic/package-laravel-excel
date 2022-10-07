@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\BatchImport;
+use App\Imports\ChunkImport;
 use App\Imports\MultiSheetSelector;
 use App\Imports\MultiSheetSelectSpecificSheet;
 use App\Imports\MultiSheetSingleFormatImport;
@@ -114,5 +115,14 @@ class UserController extends Controller
         );
 
         return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_with_chunk_reading() {
+        Excel::import(
+            new ChunkImport,
+            'mock_data/MOCK_DATA_6.csv'
+        );
+
+//        return redirect('/')->with('success', 'Users Imported Successfully!');
     }
 }

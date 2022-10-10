@@ -79,3 +79,8 @@ Route::get(
     [UserController::class, 'import_with_chunk_reading']
 );
 
+Route::get(
+    '/import-with-queue',
+    [UserController::class, 'import_with_queue']
+);
+

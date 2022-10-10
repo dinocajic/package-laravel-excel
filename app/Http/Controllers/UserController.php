@@ -12,6 +12,7 @@ use App\Imports\MultiSheetSkipUnknownSheetTwo;
 use App\Imports\MultiSheetSpecificSelectorByIndex;
 use App\Imports\MultiSheetSpecificSelectorByName;
 use App\Imports\MultiSheetWithFormulasImporter;
+use App\Imports\QueuedImport;
 use App\Imports\SheetWithFormulaImport;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -124,5 +125,14 @@ class UserController extends Controller
         );
 
 //        return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function import_with_queue() {
+        Excel::queueImport(
+            new QueuedImport,
+            'mock_data/MOCK_DATA_6.csv'
+        );
+
+        return redirect('/')->with('success', 'Users Imported Successfully!');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Imports\BatchImport;
 use App\Imports\ChunkImport;
 use App\Imports\MultiSheetSelector;
@@ -134,5 +135,12 @@ class UserController extends Controller
         );
 
         return redirect('/')->with('success', 'Users Imported Successfully!');
+    }
+
+    public function export_users() {
+        return Excel::download(
+            new UsersExport,
+            'users.xlsx'
+        );
     }
 }

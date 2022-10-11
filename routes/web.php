@@ -84,3 +84,7 @@ Route::get(
     [UserController::class, 'import_with_queue']
 );
 
+Route::get(
+    '/export-users',
+    [UserController::class, 'export_users']
+);

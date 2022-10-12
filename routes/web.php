@@ -88,3 +88,8 @@ Route::get(
     '/export-users',
     [UserController::class, 'export_users']
 );
+
+Route::get(
+    '/export-users-from-view',
+    [UserController::class, 'export_users_from_view']
+);
